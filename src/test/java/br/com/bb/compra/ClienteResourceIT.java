@@ -1,4 +1,4 @@
-package br.com.bb.compras;
+package br.com.bb.compra;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 

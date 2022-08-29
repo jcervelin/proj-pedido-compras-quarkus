@@ -1,9 +1,12 @@
-package br.com.bb.compras.controller;
+package br.com.bb.compra.controller;
 
-import br.com.bb.compras.model.Cliente;
-import br.com.bb.compras.service.ClienteService;
+import br.com.bb.compra.model.Cliente;
+import br.com.bb.compra.service.ClienteService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -17,10 +20,12 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/clientes")
-@RequiredArgsConstructor
+@Slf4j
 public class ClienteResource {
 
-    private final ClienteService clienteService;
+    @Inject
+    @Named("clienteServiceImpl")
+    ClienteService clienteService;
 
     @GET
     public List<Cliente> clientes() {
@@ -29,8 +34,8 @@ public class ClienteResource {
 
     @POST
     public Response criarCliente(@Valid Cliente cliente) {
-        final Cliente clienteSalvo = clienteService.salvarCliente(cliente);
-        return Response.ok(clienteSalvo)
+        clienteService.salvarCliente(cliente);
+        return Response.ok(cliente)
                 .build();
     }
 
