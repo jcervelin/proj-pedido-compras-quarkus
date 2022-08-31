@@ -29,4 +29,9 @@ public class ClienteRepository {
         return typedQuery.getResultList();
     }
 
+//    public List<ClienteEntity> findClienteByEmail(String email) {
+//        final TypedQuery<ClienteEntity> typedQuery = em.createQuery("select c from ClienteEntity c where c.email = :email", ClienteEntity.class);
+//        return typedQuery.getResultList();
+//    }
+
 }
