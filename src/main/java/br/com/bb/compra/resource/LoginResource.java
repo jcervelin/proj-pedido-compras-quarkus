@@ -34,8 +34,17 @@ public class LoginResource {
 
     @Operation(description = "Realizar login")
     @POST
-    public Response salvar(@Valid LoginDto loginDto) {
-        return null;
+    public Response logar(@Valid LoginDto loginDto) {
+
+        final Cliente cliente = clienteService.findByEmail(loginDto.getEmail());
+
+        if (Objects.isNull(cliente) || !cliente.getSenha().equals(PasswordUtils.encode(loginDto.getSenha()))) {
+            return Response.status(HttpStatus.SC_FORBIDDEN).build();
+        }
+
+        final String token = JwtUtils.generateToken(cliente.getEmail(), Set.of(cliente.getPerfil().name()));
+
+        return Response.ok(new TokenDto(cliente.getEmail(), token)).build();
     }
 
 }

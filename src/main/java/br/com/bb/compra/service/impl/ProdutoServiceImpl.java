@@ -45,7 +45,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     public Produto buscaPorId(Long id) {
-        final ProdutoEntity produtoSalvo = repository.findById(id);
+        final ProdutoEntity produtoSalvo = ProdutoEntity.findById(id);
         if (produtoSalvo.getId() == null) {
             throw new RuntimeException();
         }
