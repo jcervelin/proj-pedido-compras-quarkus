@@ -9,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static br.com.bb.compra.converter.ClienteConverter.convertDtoTo;
+import static br.com.bb.compra.converter.ClienteConverter.convertEntityTo;
 
 @ApplicationScoped
 @Named("clienteServiceImpl")
@@ -20,32 +22,17 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void salvarCliente(Cliente cliente) {
-
-        final ClienteEntity entity = ClienteEntity.builder()
-                .email(cliente.getEmail())
-                .cpf(cliente.getCpf())
-                .nome(cliente.getNome())
-                .build();
-        clienteRepository.save(entity);
-        cliente.setId(entity.getId());
+        clienteRepository.save(convertDtoTo(cliente));
     }
 
     @Override
     public List<Cliente> getClientes() {
-        return convert(clienteRepository.findAll());
+        return convertEntityTo(clienteRepository.findAll());
     }
 
-    private Cliente convert(ClienteEntity entity) {
-        return Cliente.builder()
-                .id(entity.getId())
-                .cpf(entity.getCpf())
-                .nome(entity.getNome())
-                .email(entity.getEmail())
-                .build();
-    }
-
-    private List<Cliente> convert(List<ClienteEntity> entities) {
-        return entities.stream().map(this::convert)
-                .collect(Collectors.toList());
+    @Override
+    public Cliente findByEmail(String email) {
+        final ClienteEntity entity = clienteRepository.findByEmail(email);
+        return convertEntityTo(entity);
     }
 }

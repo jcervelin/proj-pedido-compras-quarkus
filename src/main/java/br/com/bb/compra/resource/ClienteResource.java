@@ -1,9 +1,9 @@
-package br.com.bb.compra.controller;
+package br.com.bb.compra.resource;
 
 import br.com.bb.compra.model.Cliente;
 import br.com.bb.compra.service.ClienteService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.microprofile.openapi.annotations.Operation;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -33,6 +33,7 @@ public class ClienteResource {
     }
 
     @POST
+    @Operation(description = "Salvar um cliente")
     public Response criarCliente(@Valid Cliente cliente) {
         clienteService.salvarCliente(cliente);
         return Response.ok(cliente)

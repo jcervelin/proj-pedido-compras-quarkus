@@ -1,10 +1,14 @@
 package br.com.bb.compra.model;
 
+import br.com.bb.compra.model.enums.PerfilEnum;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -29,4 +33,9 @@ public class Cliente {
     @Email(message = "Email invalido")
     private String email;
 
+    @JsonIgnoreProperties(allowGetters = true)
+    private String senha;
+
+    @Enumerated(EnumType.STRING)
+    private PerfilEnum perfil;
 }
