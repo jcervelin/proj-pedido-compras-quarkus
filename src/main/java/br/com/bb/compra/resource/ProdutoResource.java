@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response;
 @Path("/produtos")
 @RequiredArgsConstructor
 @Slf4j
-public class ProdutoController {
+public class ProdutoResource {
 
     private final ProdutoService produtoService;
 

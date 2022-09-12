@@ -50,4 +50,14 @@ public class ClienteServiceImpl implements ClienteService {
         final ClienteEntity entity = clienteRepository.findByEmail(email);
         return convertEntityTo(entity);
     }
+
+    @Override
+    public List<String> cpfByEmail(String email) {
+        return clienteRepository.findByEmailNamedQuery(email);
+    }
+
+    @Override
+    public List<Cliente> mapCliente(String nome) {
+        return clienteRepository.mapCliente(nome);
+    }
 }
