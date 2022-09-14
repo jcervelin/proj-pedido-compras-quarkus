@@ -1,3 +1,13 @@
+# Tasks
+
+## task 1
+verificar se ha risco de remover estoque de produto cancelado
+
+## task 2
+alterar status dos produtos para PROCESSADO
+
+
+
 # proj-compras Project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
