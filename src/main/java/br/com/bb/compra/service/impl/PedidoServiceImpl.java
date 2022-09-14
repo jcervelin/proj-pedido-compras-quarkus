@@ -19,7 +19,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Instance;
 import javax.transaction.Transactional;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,6 +43,10 @@ public class PedidoServiceImpl implements PedidoService {
         pedidoEntity.persist();
 
         processamentoPedidos.forEach(p -> p.processar(pedidoEntity));
+
+        if (pedidoEntity.getStatus() == StatusPedidoTipo.NOVO) {
+            pedidoEntity.setStatus(StatusPedidoTipo.PROCESSADO);
+        }
 
         log.info("O usuario {} iniciou pedido {}", email, pedidoDto);
         return new PedidoResponseDto(pedidoEntity.id);
