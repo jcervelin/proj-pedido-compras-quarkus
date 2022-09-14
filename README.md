@@ -6,6 +6,9 @@ verificar se ha risco de remover estoque de produto cancelado
 ## task 2
 alterar status dos produtos para PROCESSADO
 
+## task 3
+criar novo processamento de enviar emails para o cliente
+Obs.: O email pode ser representado por uma classe que só loga algo como: "Mensagem enviada ao cliente"
 
 
 # proj-compras Project
